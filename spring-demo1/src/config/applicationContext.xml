@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <!-- Person person = new Person();
+        value指定的是简单类型数据(基本数据类型和字符串)
+    -->
+    <bean id="person" class="com.gec.spring.bean.person">
+        <property name="name" value="lisi"/>
+        <property name="speaking" value="好好学习!!!!"/>
+    </bean>
+
+ <!--ref 对象类型引用 -->
+<!--    <bean id="computer" class="com.gec.spring.bean.Computer">-->
+<!--        <property name="host" ref="host"/>-->
+<!--        <property name="display" ref="display"/>-->
+<!--    </bean>-->
+    <bean id="host" class="com.gec.spring.bean.Host"/>
+    <bean id="display" class="com.gec.spring.bean.Display"/>
+ <!--p命名空间 -->
+<!--    <bean id="computer" class="com.gec.spring.bean.Computer" p:host-ref="host" p:display-ref="display"/>&lt;!&ndash;&ndash;&gt;-->
+
+    <!--构造器注入-->
+<!--  <bean id="computer" class="com.gec.spring.bean.Computer">
+      <constructor-arg index="0" ref="host"/>
+      <constructor-arg index="1" ref="display"/>
+  </bean>-->
+
+<!--自动装配 -->
+<bean id="computer" class="com.gec.spring.bean.Computer" autowire="byName"/>
+
+    <bean id="date1" class="java.util.Date" scope="singleton"/>
+    <bean id="date2" class="java.util.Date" scope="prototype"/>
+</beans>

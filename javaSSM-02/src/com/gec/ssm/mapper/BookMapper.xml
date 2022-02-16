@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gec.ssm.mapper.BookMapper">
+  <resultMap id="BaseResultMap" type="com.gec.ssm.pojo.Book">
+    <!--@mbg.generated-->
+    <!--@Table book-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="publish_time" jdbcType="DATE" property="publishTime" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="publish_name" jdbcType="VARCHAR" property="publishName" />
+    <result column="self_time" jdbcType="TIMESTAMP" property="selfTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `NAME`, category_id, publish_time, price, publish_name, self_time
+  </sql>
+  <select id="selectByExample" parameterType="com.gec.ssm.pojo.BookExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from book
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from book
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gec.ssm.pojo.BookExample">
+    <!--@mbg.generated-->
+    delete from book
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.gec.ssm.pojo.Book" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into book (`NAME`, category_id, publish_time, 
+      price, publish_name, self_time
+      )
+    values (#{name,jdbcType=VARCHAR}, #{categoryId,jdbcType=INTEGER}, #{publishTime,jdbcType=DATE}, 
+      #{price,jdbcType=DECIMAL}, #{publishName,jdbcType=VARCHAR}, #{selfTime,jdbcType=TIMESTAMP}
+      )
+
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.gec.ssm.pojo.Book" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null and name != ''">
+        `NAME`,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="publishTime != null">
+        publish_time,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="publishName != null and publishName != ''">
+        publish_name,
+      </if>
+      <if test="selfTime != null">
+        self_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null and name != ''">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null">
+        #{publishTime,jdbcType=DATE},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="publishName != null and publishName != ''">
+        #{publishName,jdbcType=VARCHAR},
+      </if>
+      <if test="selfTime != null">
+        #{selfTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gec.ssm.pojo.BookExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from book
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update book
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        `NAME` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishTime != null">
+        publish_time = #{record.publishTime,jdbcType=DATE},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.publishName != null">
+        publish_name = #{record.publishName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.selfTime != null">
+        self_time = #{record.selfTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update book
+    set id = #{record.id,jdbcType=INTEGER},
+      `NAME` = #{record.name,jdbcType=VARCHAR},
+      category_id = #{record.categoryId,jdbcType=INTEGER},
+      publish_time = #{record.publishTime,jdbcType=DATE},
+      price = #{record.price,jdbcType=DECIMAL},
+      publish_name = #{record.publishName,jdbcType=VARCHAR},
+      self_time = #{record.selfTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gec.ssm.pojo.Book">
+    <!--@mbg.generated-->
+    update book
+    <set>
+      <if test="name != null and name != ''">
+        `NAME` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null">
+        publish_time = #{publishTime,jdbcType=DATE},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="publishName != null and publishName != ''">
+        publish_name = #{publishName,jdbcType=VARCHAR},
+      </if>
+      <if test="selfTime != null">
+        self_time = #{selfTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gec.ssm.pojo.Book">
+    <!--@mbg.generated-->
+    update book
+    set `NAME` = #{name,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      publish_time = #{publishTime,jdbcType=DATE},
+      price = #{price,jdbcType=DECIMAL},
+      publish_name = #{publishName,jdbcType=VARCHAR},
+      self_time = #{selfTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update book
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`NAME` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.name,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="category_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.categoryId,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="publish_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.publishTime,jdbcType=DATE}
+        </foreach>
+      </trim>
+      <trim prefix="price = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.price,jdbcType=DECIMAL}
+        </foreach>
+      </trim>
+      <trim prefix="publish_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.publishName,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="self_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=INTEGER} then #{item.selfTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update book
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`NAME` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.name != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.name,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="category_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.categoryId != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.categoryId,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="publish_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.publishTime != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.publishTime,jdbcType=DATE}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="price = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.price != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.price,jdbcType=DECIMAL}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="publish_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.publishName != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.publishName,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="self_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.selfTime != null">
+            when id = #{item.id,jdbcType=INTEGER} then #{item.selfTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into book
+    (`NAME`, category_id, publish_time, price, publish_name, self_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.name,jdbcType=VARCHAR}, #{item.categoryId,jdbcType=INTEGER}, #{item.publishTime,jdbcType=DATE}, 
+        #{item.price,jdbcType=DECIMAL}, #{item.publishName,jdbcType=VARCHAR}, #{item.selfTime,jdbcType=TIMESTAMP}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.gec.ssm.pojo.Book" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      `NAME`,
+      category_id,
+      publish_time,
+      price,
+      publish_name,
+      self_time,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      #{name,jdbcType=VARCHAR},
+      #{categoryId,jdbcType=INTEGER},
+      #{publishTime,jdbcType=DATE},
+      #{price,jdbcType=DECIMAL},
+      #{publishName,jdbcType=VARCHAR},
+      #{selfTime,jdbcType=TIMESTAMP},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      `NAME` = #{name,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      publish_time = #{publishTime,jdbcType=DATE},
+      price = #{price,jdbcType=DECIMAL},
+      publish_name = #{publishName,jdbcType=VARCHAR},
+      self_time = #{selfTime,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.gec.ssm.pojo.Book" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null and name != ''">
+        `NAME`,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="publishTime != null">
+        publish_time,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="publishName != null and publishName != ''">
+        publish_name,
+      </if>
+      <if test="selfTime != null">
+        self_time,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null and name != ''">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null">
+        #{publishTime,jdbcType=DATE},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="publishName != null and publishName != ''">
+        #{publishName,jdbcType=VARCHAR},
+      </if>
+      <if test="selfTime != null">
+        #{selfTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null and name != ''">
+        `NAME` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null">
+        publish_time = #{publishTime,jdbcType=DATE},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="publishName != null and publishName != ''">
+        publish_name = #{publishName,jdbcType=VARCHAR},
+      </if>
+      <if test="selfTime != null">
+        self_time = #{selfTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gec.auction.mapper.AuctionMapper">
+    <resultMap id="BaseResultMap" type="com.gec.auction.pojo.Auction">
+        <!--@mbg.generated-->
+        <!--@Table demo.auction-->
+        <id column="auctionId" jdbcType="INTEGER" property="auctionid"/>
+        <result column="auctionName" jdbcType="VARCHAR" property="auctionname"/>
+        <result column="auctionStartPrice" jdbcType="DECIMAL" property="auctionstartprice"/>
+        <result column="auctionUpset" jdbcType="DECIMAL" property="auctionupset"/>
+        <result column="auctionStartTime" jdbcType="TIMESTAMP" property="auctionstarttime"/>
+        <result column="auctionEndTime" jdbcType="TIMESTAMP" property="auctionendtime"/>
+        <result column="auctionPic" jdbcType="VARCHAR" property="auctionpic"/>
+        <result column="auctionPicType" jdbcType="VARCHAR" property="auctionpictype"/>
+        <result column="auctionDesc" jdbcType="VARCHAR" property="auctiondesc"/>
+        <!-- 一方关联-->
+        <association property="auctionrecord" javaType="com.gec.auction.pojo.Auctionrecord">
+            <id column="auctionId" jdbcType="INTEGER" property="auctionid"/>
+        </association>
+    </resultMap>
+
+    <select id="deleteAuctionById"  resultMap="BaseResultMap">
+        DELETE
+        FROM demo.auctionrecord
+        where auctionId = #{auctionId};
+                DELETE
+                FROM demo.auction
+                where auctionId = #{auctionId}
+    </select>
+
+    <sql id="Example_Where_Clause">
+        <!--@mbg.generated-->
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <!--@mbg.generated-->
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        auctionId, auctionName, auctionStartPrice, auctionUpset, auctionStartTime, auctionEndTime,
+        auctionPic, auctionPicType, auctionDesc
+    </sql>
+
+
+    <select id="selectByExample" parameterType="com.gec.auction.pojo.AuctionExample" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from auction
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from auction
+        where auctionId = #{auctionid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete
+        from auction
+        where auctionId = #{auctionid,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.gec.auction.pojo.AuctionExample">
+        <!--@mbg.generated-->
+        delete
+        from auction
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" keyColumn="auctionId" keyProperty="auctionid" parameterType="com.gec.auction.pojo.Auction"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into auction (auctionName, auctionStartPrice, auctionUpset,
+                             auctionStartTime, auctionEndTime, auctionPic,
+                             auctionPicType, auctionDesc)
+        values (#{auctionname,jdbcType=VARCHAR}, #{auctionstartprice,jdbcType=DECIMAL},
+                #{auctionupset,jdbcType=DECIMAL},
+                #{auctionstarttime,jdbcType=TIMESTAMP}, #{auctionendtime,jdbcType=TIMESTAMP},
+                #{auctionpic,jdbcType=VARCHAR},
+                #{auctionpictype,jdbcType=VARCHAR}, #{auctiondesc,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="auctionId" keyProperty="auctionid"
+            parameterType="com.gec.auction.pojo.Auction" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into auction
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="auctionname != null and auctionname != ''">
+                auctionName,
+            </if>
+            <if test="auctionstartprice != null">
+                auctionStartPrice,
+            </if>
+            <if test="auctionupset != null">
+                auctionUpset,
+            </if>
+            <if test="auctionstarttime != null">
+                auctionStartTime,
+            </if>
+            <if test="auctionendtime != null">
+                auctionEndTime,
+            </if>
+            <if test="auctionpic != null and auctionpic != ''">
+                auctionPic,
+            </if>
+            <if test="auctionpictype != null and auctionpictype != ''">
+                auctionPicType,
+            </if>
+            <if test="auctiondesc != null and auctiondesc != ''">
+                auctionDesc,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="auctionname != null and auctionname != ''">
+                #{auctionname,jdbcType=VARCHAR},
+            </if>
+            <if test="auctionstartprice != null">
+                #{auctionstartprice,jdbcType=DECIMAL},
+            </if>
+            <if test="auctionupset != null">
+                #{auctionupset,jdbcType=DECIMAL},
+            </if>
+            <if test="auctionstarttime != null">
+                #{auctionstarttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auctionendtime != null">
+                #{auctionendtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auctionpic != null and auctionpic != ''">
+                #{auctionpic,jdbcType=VARCHAR},
+            </if>
+            <if test="auctionpictype != null and auctionpictype != ''">
+                #{auctionpictype,jdbcType=VARCHAR},
+            </if>
+            <if test="auctiondesc != null and auctiondesc != ''">
+                #{auctiondesc,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.gec.auction.pojo.AuctionExample" resultType="java.lang.Long">
+        <!--@mbg.generated-->
+        select count(*)
+        from auction
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        <!--@mbg.generated-->
+        update auction
+        <set>
+            <if test="record.auctionid != null">
+                auctionId = #{record.auctionid,jdbcType=INTEGER},
+            </if>
+            <if test="record.auctionname != null">
+                auctionName = #{record.auctionname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auctionstartprice != null">
+                auctionStartPrice = #{record.auctionstartprice,jdbcType=DECIMAL},
+            </if>
+            <if test="record.auctionupset != null">
+                auctionUpset = #{record.auctionupset,jdbcType=DECIMAL},
+            </if>
+            <if test="record.auctionstarttime != null">
+                auctionStartTime = #{record.auctionstarttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.auctionendtime != null">
+                auctionEndTime = #{record.auctionendtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.auctionpic != null">
+                auctionPic = #{record.auctionpic,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auctionpictype != null">
+                auctionPicType = #{record.auctionpictype,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auctiondesc != null">
+                auctionDesc = #{record.auctiondesc,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        <!--@mbg.generated-->
+        update auction
+        set auctionId         = #{record.auctionid,jdbcType=INTEGER},
+            auctionName       = #{record.auctionname,jdbcType=VARCHAR},
+            auctionStartPrice = #{record.auctionstartprice,jdbcType=DECIMAL},
+            auctionUpset      = #{record.auctionupset,jdbcType=DECIMAL},
+            auctionStartTime  = #{record.auctionstarttime,jdbcType=TIMESTAMP},
+            auctionEndTime    = #{record.auctionendtime,jdbcType=TIMESTAMP},
+            auctionPic        = #{record.auctionpic,jdbcType=VARCHAR},
+            auctionPicType    = #{record.auctionpictype,jdbcType=VARCHAR},
+            auctionDesc       = #{record.auctiondesc,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gec.auction.pojo.Auction">
+        <!--@mbg.generated-->
+        update auction
+        <set>
+            <if test="auctionname != null and auctionname != ''">
+                auctionName = #{auctionname,jdbcType=VARCHAR},
+            </if>
+            <if test="auctionstartprice != null">
+                auctionStartPrice = #{auctionstartprice,jdbcType=DECIMAL},
+            </if>
+            <if test="auctionupset != null">
+                auctionUpset = #{auctionupset,jdbcType=DECIMAL},
+            </if>
+            <if test="auctionstarttime != null">
+                auctionStartTime = #{auctionstarttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auctionendtime != null">
+                auctionEndTime = #{auctionendtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auctionpic != null and auctionpic != ''">
+                auctionPic = #{auctionpic,jdbcType=VARCHAR},
+            </if>
+            <if test="auctionpictype != null and auctionpictype != ''">
+                auctionPicType = #{auctionpictype,jdbcType=VARCHAR},
+            </if>
+            <if test="auctiondesc != null and auctiondesc != ''">
+                auctionDesc = #{auctiondesc,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where auctionId = #{auctionid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gec.auction.pojo.Auction">
+        <!--@mbg.generated-->
+        update auction
+        set auctionName       = #{auctionname,jdbcType=VARCHAR},
+            auctionStartPrice = #{auctionstartprice,jdbcType=DECIMAL},
+            auctionUpset      = #{auctionupset,jdbcType=DECIMAL},
+            auctionStartTime  = #{auctionstarttime,jdbcType=TIMESTAMP},
+            auctionEndTime    = #{auctionendtime,jdbcType=TIMESTAMP},
+            auctionPic        = #{auctionpic,jdbcType=VARCHAR},
+            auctionPicType    = #{auctionpictype,jdbcType=VARCHAR},
+            auctionDesc       = #{auctiondesc,jdbcType=VARCHAR}
+        where auctionId = #{auctionid,jdbcType=INTEGER}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update auction
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="auctionName = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when auctionId = #{item.auctionid,jdbcType=INTEGER} then #{item.auctionname,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="auctionStartPrice = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when auctionId = #{item.auctionid,jdbcType=INTEGER} then #{item.auctionstartprice,jdbcType=DECIMAL}
+                </foreach>
+            </trim>
+            <trim prefix="auctionUpset = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when auctionId = #{item.auctionid,jdbcType=INTEGER} then #{item.auctionupset,jdbcType=DECIMAL}
+                </foreach>
+            </trim>
+            <trim prefix="auctionStartTime = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when auctionId = #{item.auctionid,jdbcType=INTEGER} then #{item.auctionstarttime,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+            <trim prefix="auctionEndTime = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when auctionId = #{item.auctionid,jdbcType=INTEGER} then #{item.auctionendtime,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+            <trim prefix="auctionPic = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when auctionId = #{item.auctionid,jdbcType=INTEGER} then #{item.auctionpic,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="auctionPicType = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when auctionId = #{item.auctionid,jdbcType=INTEGER} then #{item.auctionpictype,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="auctionDesc = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when auctionId = #{item.auctionid,jdbcType=INTEGER} then #{item.auctiondesc,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+        </trim>
+        where auctionId in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.auctionid,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    <update id="updateBatchSelective" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update auction
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="auctionName = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.auctionname != null">
+                        when auctionId = #{item.auctionid,jdbcType=INTEGER} then #{item.auctionname,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="auctionStartPrice = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.auctionstartprice != null">
+                        when auctionId = #{item.auctionid,jdbcType=INTEGER}
+                                then #{item.auctionstartprice,jdbcType=DECIMAL}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="auctionUpset = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.auctionupset != null">
+                        when auctionId = #{item.auctionid,jdbcType=INTEGER} then #{item.auctionupset,jdbcType=DECIMAL}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="auctionStartTime = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.auctionstarttime != null">
+                        when auctionId = #{item.auctionid,jdbcType=INTEGER}
+                                then #{item.auctionstarttime,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="auctionEndTime = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.auctionendtime != null">
+                        when auctionId = #{item.auctionid,jdbcType=INTEGER}
+                                then #{item.auctionendtime,jdbcType=TIMESTAMP}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="auctionPic = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.auctionpic != null">
+                        when auctionId = #{item.auctionid,jdbcType=INTEGER} then #{item.auctionpic,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="auctionPicType = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.auctionpictype != null">
+                        when auctionId = #{item.auctionid,jdbcType=INTEGER} then #{item.auctionpictype,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="auctionDesc = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    <if test="item.auctiondesc != null">
+                        when auctionId = #{item.auctionid,jdbcType=INTEGER} then #{item.auctiondesc,jdbcType=VARCHAR}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where auctionId in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.auctionid,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="auctionId" keyProperty="auctionid" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into auction
+                (auctionName, auctionStartPrice, auctionUpset, auctionStartTime, auctionEndTime,
+                 auctionPic, auctionPicType, auctionDesc)
+                values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.auctionname,jdbcType=VARCHAR}, #{item.auctionstartprice,jdbcType=DECIMAL},
+             #{item.auctionupset,jdbcType=DECIMAL}, #{item.auctionstarttime,jdbcType=TIMESTAMP},
+             #{item.auctionendtime,jdbcType=TIMESTAMP}, #{item.auctionpic,jdbcType=VARCHAR},
+             #{item.auctionpictype,jdbcType=VARCHAR}, #{item.auctiondesc,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="auctionId" keyProperty="auctionid"
+            parameterType="com.gec.auction.pojo.Auction" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into auction
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="auctionid != null">
+                auctionId,
+            </if>
+            auctionName,
+            auctionStartPrice,
+            auctionUpset,
+            auctionStartTime,
+            auctionEndTime,
+            auctionPic,
+            auctionPicType,
+            auctionDesc,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="auctionid != null">
+                #{auctionid,jdbcType=INTEGER},
+            </if>
+            #{auctionname,jdbcType=VARCHAR},
+            #{auctionstartprice,jdbcType=DECIMAL},
+            #{auctionupset,jdbcType=DECIMAL},
+            #{auctionstarttime,jdbcType=TIMESTAMP},
+            #{auctionendtime,jdbcType=TIMESTAMP},
+            #{auctionpic,jdbcType=VARCHAR},
+            #{auctionpictype,jdbcType=VARCHAR},
+            #{auctiondesc,jdbcType=VARCHAR},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="auctionid != null">
+                auctionId = #{auctionid,jdbcType=INTEGER},
+            </if>
+            auctionName       = #{auctionname,jdbcType=VARCHAR},
+            auctionStartPrice = #{auctionstartprice,jdbcType=DECIMAL},
+            auctionUpset      = #{auctionupset,jdbcType=DECIMAL},
+            auctionStartTime  = #{auctionstarttime,jdbcType=TIMESTAMP},
+            auctionEndTime    = #{auctionendtime,jdbcType=TIMESTAMP},
+            auctionPic        = #{auctionpic,jdbcType=VARCHAR},
+            auctionPicType    = #{auctionpictype,jdbcType=VARCHAR},
+            auctionDesc       = #{auctiondesc,jdbcType=VARCHAR},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="auctionId" keyProperty="auctionid"
+            parameterType="com.gec.auction.pojo.Auction" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into auction
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="auctionid != null">
+                auctionId,
+            </if>
+            <if test="auctionname != null and auctionname != ''">
+                auctionName,
+            </if>
+            <if test="auctionstartprice != null">
+                auctionStartPrice,
+            </if>
+            <if test="auctionupset != null">
+                auctionUpset,
+            </if>
+            <if test="auctionstarttime != null">
+                auctionStartTime,
+            </if>
+            <if test="auctionendtime != null">
+                auctionEndTime,
+            </if>
+            <if test="auctionpic != null and auctionpic != ''">
+                auctionPic,
+            </if>
+            <if test="auctionpictype != null and auctionpictype != ''">
+                auctionPicType,
+            </if>
+            <if test="auctiondesc != null and auctiondesc != ''">
+                auctionDesc,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="auctionid != null">
+                #{auctionid,jdbcType=INTEGER},
+            </if>
+            <if test="auctionname != null and auctionname != ''">
+                #{auctionname,jdbcType=VARCHAR},
+            </if>
+            <if test="auctionstartprice != null">
+                #{auctionstartprice,jdbcType=DECIMAL},
+            </if>
+            <if test="auctionupset != null">
+                #{auctionupset,jdbcType=DECIMAL},
+            </if>
+            <if test="auctionstarttime != null">
+                #{auctionstarttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auctionendtime != null">
+                #{auctionendtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auctionpic != null and auctionpic != ''">
+                #{auctionpic,jdbcType=VARCHAR},
+            </if>
+            <if test="auctionpictype != null and auctionpictype != ''">
+                #{auctionpictype,jdbcType=VARCHAR},
+            </if>
+            <if test="auctiondesc != null and auctiondesc != ''">
+                #{auctiondesc,jdbcType=VARCHAR},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="auctionid != null">
+                auctionId = #{auctionid,jdbcType=INTEGER},
+            </if>
+            <if test="auctionname != null and auctionname != ''">
+                auctionName = #{auctionname,jdbcType=VARCHAR},
+            </if>
+            <if test="auctionstartprice != null">
+                auctionStartPrice = #{auctionstartprice,jdbcType=DECIMAL},
+            </if>
+            <if test="auctionupset != null">
+                auctionUpset = #{auctionupset,jdbcType=DECIMAL},
+            </if>
+            <if test="auctionstarttime != null">
+                auctionStartTime = #{auctionstarttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auctionendtime != null">
+                auctionEndTime = #{auctionendtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auctionpic != null and auctionpic != ''">
+                auctionPic = #{auctionpic,jdbcType=VARCHAR},
+            </if>
+            <if test="auctionpictype != null and auctionpictype != ''">
+                auctionPicType = #{auctionpictype,jdbcType=VARCHAR},
+            </if>
+            <if test="auctiondesc != null and auctiondesc != ''">
+                auctionDesc = #{auctiondesc,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

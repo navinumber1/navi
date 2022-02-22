@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
+  <process id="user" name="user" isExecutable="true">
+    <userTask id="sid-27c2fe64-d4bf-4380-9d73-34881c081887"/>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_user">
+    <bpmndi:BPMNPlane bpmnElement="user" id="BPMNPlane_user">
+      <bpmndi:BPMNShape id="shape-dee4dc38-e1c9-48f3-a028-260817eb7546" bpmnElement="sid-27c2fe64-d4bf-4380-9d73-34881c081887">
+        <omgdc:Bounds x="-70.0" y="-25.0" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

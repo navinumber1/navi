@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.activiti.mapper.LeavebillMapper">
+  <resultMap id="BaseResultMap" type="com.web.activiti.pojo.Leavebill">
+    <!--@mbg.generated-->
+    <!--@Table leavebill-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="days" jdbcType="INTEGER" property="days" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="leaveDate" jdbcType="TIMESTAMP" property="leavedate" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `days`, content, remark, leaveDate, `state`, user_id
+  </sql>
+  <select id="selectByExample" parameterType="com.web.activiti.pojo.LeavebillExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from leavebill
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from leavebill
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from leavebill
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.web.activiti.pojo.LeavebillExample">
+    <!--@mbg.generated-->
+    delete from leavebill
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.web.activiti.pojo.Leavebill" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into leavebill (`days`, content, remark, 
+      leaveDate, `state`, user_id ,id
+      )
+    values (#{days,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{leavedate,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT},#{id,jdbcType=BIGINT}
+      );
+    <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.web.activiti.pojo.Leavebill" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into leavebill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="days != null">
+        `days`,
+      </if>
+      <if test="content != null and content != ''">
+        content,
+      </if>
+      <if test="remark != null and remark != ''">
+        remark,
+      </if>
+      <if test="leavedate != null">
+        leaveDate,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="days != null">
+        #{days,jdbcType=INTEGER},
+      </if>
+      <if test="content != null and content != ''">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and remark != ''">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leavedate != null">
+        #{leavedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.web.activiti.pojo.LeavebillExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from leavebill
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update leavebill
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.days != null">
+        `days` = #{record.days,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leavedate != null">
+        leaveDate = #{record.leavedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null">
+        `state` = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update leavebill
+    set id = #{record.id,jdbcType=BIGINT},
+      `days` = #{record.days,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      leaveDate = #{record.leavedate,jdbcType=TIMESTAMP},
+      `state` = #{record.state,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.web.activiti.pojo.Leavebill">
+    <!--@mbg.generated-->
+    update leavebill
+    <set>
+      <if test="days != null">
+        `days` = #{days,jdbcType=INTEGER},
+      </if>
+      <if test="content != null and content != ''">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and remark != ''">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leavedate != null">
+        leaveDate = #{leavedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.web.activiti.pojo.Leavebill">
+    <!--@mbg.generated-->
+    update leavebill
+    set `days` = #{days,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      leaveDate = #{leavedate,jdbcType=TIMESTAMP},
+      `state` = #{state,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update leavebill
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`days` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.days,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="content = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.content,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="remark = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="leaveDate = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.leavedate,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="`state` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.state,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.userId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update leavebill
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`days` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.days != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.days,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="content = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.content != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.content,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="remark = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.remark != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.remark,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="leaveDate = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.leavedate != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.leavedate,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`state` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.state != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.state,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="user_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.userId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.userId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into leavebill
+    (`days`, content, remark, leaveDate, `state`, user_id)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.days,jdbcType=INTEGER}, #{item.content,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, 
+        #{item.leavedate,jdbcType=TIMESTAMP}, #{item.state,jdbcType=INTEGER}, #{item.userId,jdbcType=BIGINT}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.web.activiti.pojo.Leavebill" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into leavebill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      `days`,
+      content,
+      remark,
+      leaveDate,
+      `state`,
+      user_id,
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      #{days,jdbcType=INTEGER},
+      #{content,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR},
+      #{leavedate,jdbcType=TIMESTAMP},
+      #{state,jdbcType=INTEGER},
+      #{userId,jdbcType=BIGINT},
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      `days` = #{days,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      leaveDate = #{leavedate,jdbcType=TIMESTAMP},
+      `state` = #{state,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=BIGINT},
+    </trim>
+  </insert>
+  <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.web.activiti.pojo.Leavebill" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into leavebill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="days != null">
+        `days`,
+      </if>
+      <if test="content != null and content != ''">
+        content,
+      </if>
+      <if test="remark != null and remark != ''">
+        remark,
+      </if>
+      <if test="leavedate != null">
+        leaveDate,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="days != null">
+        #{days,jdbcType=INTEGER},
+      </if>
+      <if test="content != null and content != ''">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and remark != ''">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leavedate != null">
+        #{leavedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="days != null">
+        `days` = #{days,jdbcType=INTEGER},
+      </if>
+      <if test="content != null and content != ''">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and remark != ''">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="leavedate != null">
+        leaveDate = #{leavedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

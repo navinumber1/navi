@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.activiti.mapper.SysRolePermissionMapper">
+  <resultMap id="BaseResultMap" type="com.web.activiti.pojo.SysRolePermission">
+    <!--@mbg.generated-->
+    <!--@Table sys_role_permission-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="sys_role_id" jdbcType="VARCHAR" property="sysRoleId" />
+    <result column="sys_permission_id" jdbcType="VARCHAR" property="sysPermissionId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, sys_role_id, sys_permission_id
+  </sql>
+  <select id="selectByExample" parameterType="com.web.activiti.pojo.SysRolePermissionExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_role_permission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role_permission
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from sys_role_permission
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.web.activiti.pojo.SysRolePermissionExample">
+    <!--@mbg.generated-->
+    delete from sys_role_permission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.web.activiti.pojo.SysRolePermission">
+    <!--@mbg.generated-->
+    insert into sys_role_permission (id, sys_role_id, sys_permission_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{sysRoleId,jdbcType=VARCHAR}, #{sysPermissionId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.web.activiti.pojo.SysRolePermission">
+    <!--@mbg.generated-->
+    insert into sys_role_permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null and id != ''">
+        id,
+      </if>
+      <if test="sysRoleId != null and sysRoleId != ''">
+        sys_role_id,
+      </if>
+      <if test="sysPermissionId != null and sysPermissionId != ''">
+        sys_permission_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null and id != ''">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sysRoleId != null and sysRoleId != ''">
+        #{sysRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionId != null and sysPermissionId != ''">
+        #{sysPermissionId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.web.activiti.pojo.SysRolePermissionExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from sys_role_permission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update sys_role_permission
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysRoleId != null">
+        sys_role_id = #{record.sysRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysPermissionId != null">
+        sys_permission_id = #{record.sysPermissionId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update sys_role_permission
+    set id = #{record.id,jdbcType=VARCHAR},
+      sys_role_id = #{record.sysRoleId,jdbcType=VARCHAR},
+      sys_permission_id = #{record.sysPermissionId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.web.activiti.pojo.SysRolePermission">
+    <!--@mbg.generated-->
+    update sys_role_permission
+    <set>
+      <if test="sysRoleId != null and sysRoleId != ''">
+        sys_role_id = #{sysRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionId != null and sysPermissionId != ''">
+        sys_permission_id = #{sysPermissionId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.web.activiti.pojo.SysRolePermission">
+    <!--@mbg.generated-->
+    update sys_role_permission
+    set sys_role_id = #{sysRoleId,jdbcType=VARCHAR},
+      sys_permission_id = #{sysPermissionId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update sys_role_permission
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="sys_role_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=VARCHAR} then #{item.sysRoleId,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="sys_permission_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=VARCHAR} then #{item.sysPermissionId,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=VARCHAR}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update sys_role_permission
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="sys_role_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.sysRoleId != null">
+            when id = #{item.id,jdbcType=VARCHAR} then #{item.sysRoleId,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="sys_permission_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.sysPermissionId != null">
+            when id = #{item.id,jdbcType=VARCHAR} then #{item.sysPermissionId,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=VARCHAR}
+    </foreach>
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into sys_role_permission
+    (id, sys_role_id, sys_permission_id)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=VARCHAR}, #{item.sysRoleId,jdbcType=VARCHAR}, #{item.sysPermissionId,jdbcType=VARCHAR}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" parameterType="com.web.activiti.pojo.SysRolePermission">
+    <!--@mbg.generated-->
+    insert into sys_role_permission
+    (id, sys_role_id, sys_permission_id)
+    values
+    (#{id,jdbcType=VARCHAR}, #{sysRoleId,jdbcType=VARCHAR}, #{sysPermissionId,jdbcType=VARCHAR}
+      )
+    on duplicate key update 
+    id = #{id,jdbcType=VARCHAR}, 
+    sys_role_id = #{sysRoleId,jdbcType=VARCHAR}, 
+    sys_permission_id = #{sysPermissionId,jdbcType=VARCHAR}
+  </insert>
+  <insert id="insertOrUpdateSelective" parameterType="com.web.activiti.pojo.SysRolePermission">
+    <!--@mbg.generated-->
+    insert into sys_role_permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null and id != ''">
+        id,
+      </if>
+      <if test="sysRoleId != null and sysRoleId != ''">
+        sys_role_id,
+      </if>
+      <if test="sysPermissionId != null and sysPermissionId != ''">
+        sys_permission_id,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null and id != ''">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sysRoleId != null and sysRoleId != ''">
+        #{sysRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionId != null and sysPermissionId != ''">
+        #{sysPermissionId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null and id != ''">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sysRoleId != null and sysRoleId != ''">
+        sys_role_id = #{sysRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysPermissionId != null and sysPermissionId != ''">
+        sys_permission_id = #{sysPermissionId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
